@@ -14,7 +14,7 @@ class OverViewCard extends Component {
 
     cellDataFormat(item) {
         const name = <CenterDiv><a href={'#' + item.name}>{item.name}</a></CenterDiv>
-        const status = <CenterDiv><StatusLight error={item.error} /></CenterDiv>
+        const status = <CenterDiv><StatusLight error={item.error} ><div>⏳</div></StatusLight></CenterDiv>
         const balance = <CenterDiv>-</CenterDiv>
         const gov = <CenterDiv>-</CenterDiv>
         const vote = <CenterDiv>-</CenterDiv>
@@ -104,13 +104,19 @@ const TableCell = styled.div`
     border-bottom: 1px solid ${color.table_border};
 `
 const StatusLight = styled.div`
-    background-color: ${({ error }) => error ? color.status_red : color.status_green};
-    box-shadow: ${({ error }) => error ? color.status_red_box_shadow : color.status_green_box_shadow};
+    background-color: ${({ error }) => error ? (error === 'loading' ? '' : color.status_red) : color.status_green};
+    box-shadow: ${({ error }) => error ? (error === 'loading' ? '' : color.status_red_box_shadow) : color.status_green_box_shadow};
     width:12px;
     height:12px;
     display: inline-block;
     margin : 0 auto;
     border-radius: 50%;
+    div {
+        display :${({ error }) => error === 'loading' ? 'block' : 'none'};
+        position: absolute;
+        top: 0;
+        transform: translateX(-3px);
+    }
 `
 const CenterDiv = styled.div`
     transform: translate(-50%, -50%);
