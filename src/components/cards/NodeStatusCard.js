@@ -105,6 +105,7 @@ const TableRow = styled.div`
     display: flex;
     min-width: 400px;
     min-height: 36px;
+    white-space: pre;
    
     &:last-child{
         div {
@@ -137,7 +138,7 @@ const CenterDiv = styled.div`
 
 const ButtonWrapper = styled.div`
 margin-top: -10px;
-margin-bottom: 10px;
+margin-bottom: 20px;
 `
 const URLButton = styled.a`
 background-color:#fbc241;

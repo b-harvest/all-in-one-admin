@@ -12,7 +12,7 @@ export function getNodeStatus(uri, nodeTag, data) {
         const timeSpent = responseTime - requestTime
         if (response) {
             let parsedArray = JSON.parse(response.array)
-            parsedArray.moniker = `${nodeTag?.split('/')[1]}(${timeSpent}ms)`
+            parsedArray.moniker = `${nodeTag?.split('/')[1]}\n(${timeSpent}ms)`
 
             let monikerReplacedResponse = parsedArray
             data[nodeTag?.split('/')[0]].nodes[nodeTag?.split('/')[1]] = monikerReplacedResponse
