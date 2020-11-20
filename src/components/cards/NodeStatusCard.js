@@ -105,7 +105,7 @@ const TableRow = styled.div`
     display: flex;
     min-width: 400px;
     min-height: 36px;
-    white-space: pre;
+    // white-space: pre;
    
     &:last-child{
         div {
@@ -120,6 +120,9 @@ const TableCell = styled.div`
     min-width: 100px;
     &:nth-child(2) {
         flex: 1
+    }
+    &:first-child {
+        white-space: break-spaces;
     }
     padding: ${size.base_size_x(2.5)};
     &:not(:last-child) {

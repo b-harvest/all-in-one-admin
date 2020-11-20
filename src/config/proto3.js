@@ -18,7 +18,7 @@ export function getNodeStatus(uri, nodeTag, data) {
             data[nodeTag?.split('/')[0]].nodes[nodeTag?.split('/')[1]] = monikerReplacedResponse
         } else {
             // console.log(err)
-            data[nodeTag?.split('/')[0]].nodes[nodeTag?.split('/')[1]] = { "latest_block_height": err.message, "catching_up": 'code:' + err.code, "moniker": nodeTag?.split('/')[1] + `(${timeSpent}ms)` }
+            data[nodeTag?.split('/')[0]].nodes[nodeTag?.split('/')[1]] = { "latest_block_height": err.message, "catching_up": 'code:' + err.code, "moniker": `${nodeTag?.split('/')[1]}\n(${timeSpent}ms)` }
         }
     })
 }
