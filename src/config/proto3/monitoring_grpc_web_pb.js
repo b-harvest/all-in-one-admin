@@ -150,5 +150,85 @@ proto.monitoring.MonitoringPromiseClient.prototype.getnodeStatus =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.monitoring.SignInfoRequest,
+ *   !proto.monitoring.SignInfoResponse>}
+ */
+const methodDescriptor_Monitoring_GetvalidatorSignInfo = new grpc.web.MethodDescriptor(
+  '/monitoring.Monitoring/GetvalidatorSignInfo',
+  grpc.web.MethodType.UNARY,
+  proto.monitoring.SignInfoRequest,
+  proto.monitoring.SignInfoResponse,
+  /**
+   * @param {!proto.monitoring.SignInfoRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.monitoring.SignInfoResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.monitoring.SignInfoRequest,
+ *   !proto.monitoring.SignInfoResponse>}
+ */
+const methodInfo_Monitoring_GetvalidatorSignInfo = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.monitoring.SignInfoResponse,
+  /**
+   * @param {!proto.monitoring.SignInfoRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.monitoring.SignInfoResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.monitoring.SignInfoRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.monitoring.SignInfoResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.monitoring.SignInfoResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.monitoring.MonitoringClient.prototype.getvalidatorSignInfo =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/monitoring.Monitoring/GetvalidatorSignInfo',
+      request,
+      metadata || {},
+      methodDescriptor_Monitoring_GetvalidatorSignInfo,
+      callback);
+};
+
+
+/**
+ * @param {!proto.monitoring.SignInfoRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.monitoring.SignInfoResponse>}
+ *     Promise that resolves to the response
+ */
+proto.monitoring.MonitoringPromiseClient.prototype.getvalidatorSignInfo =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/monitoring.Monitoring/GetvalidatorSignInfo',
+      request,
+      metadata || {},
+      methodDescriptor_Monitoring_GetvalidatorSignInfo);
+};
+
+
 module.exports = proto.monitoring;
 
