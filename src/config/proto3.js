@@ -30,7 +30,8 @@ export function getValidatorSignInfo(uri, vali_address, nodeTag, data) {
     monitoringService.getvalidatorSignInfo(signInfo, {}, function (err, response) {
         if (response) {
             let res = JSON.parse(response.array[0])
-            console.log(nodeTag, res)
+            data[nodeTag?.split('/')[0]].isSign = res.SignInfo
+            // console.log(data[nodeTag?.split('/')[0]].name, data[nodeTag?.split('/')[0]].isSign)
         } else {
             console.log(err)
         }

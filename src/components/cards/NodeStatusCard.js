@@ -65,7 +65,7 @@ class NodeStatusCard extends Component {
 
     render() {
         return (
-            <BaseTitleCard id={this.props.data.name} title={this.props.data.name} borderColor={this.props.data.isAllOk ? undefined : color.status_red}>
+            <BaseTitleCard title={this.props.data.name} isSign={this.props.data.isSign} borderColor={this.props.data.isAllOk ? undefined : color.status_red}>
                 <ButtonWrapper>{this.createButtons(this.props.data.relatedPages)}</ButtonWrapper>
                 <TableWrapper>
                     <TableHeader>
