@@ -11,11 +11,11 @@ export function getIntervalChainData(reduxDataSet) {
     setInterval(() => {
         for (const item in chains) {
             chains[item].forEach(info => {
-                // let tcpAddress = `tcp://${info.ip}:26657`
-                // if (info.port) {
-                //     tcpAddress = `tcp://${info.ip}:${info.port}`
-                // }
-                getNodeStatus(`tcp://${info.ip}:26657`, `${item}/${info.nodeName}`, originNetworkData.main.nodeStatus)
+                let tcpAddress = `tcp://${info.ip}:26657`
+                if (info.port) {
+                    tcpAddress = `tcp://${info.ip}:${info.port}`
+                }
+                getNodeStatus(tcpAddress, `${item}/${info.nodeName}`, originNetworkData.main.nodeStatus)
             });
         }
     }, 3000)
