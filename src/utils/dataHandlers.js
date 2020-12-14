@@ -11,6 +11,10 @@ export function getIntervalChainData(reduxDataSet) {
     setInterval(() => {
         for (const item in chains) {
             chains[item].forEach(info => {
+                // let tcpAddress = `tcp://${info.ip}:26657`
+                // if (info.port) {
+                //     tcpAddress = `tcp://${info.ip}:${info.port}`
+                // }
                 getNodeStatus(`tcp://${info.ip}:26657`, `${item}/${info.nodeName}`, originNetworkData.main.nodeStatus)
             });
         }
@@ -20,18 +24,17 @@ export function getIntervalChainData(reduxDataSet) {
     setInterval(() => {
         // check node status
         for (let network in originNetworkData.main.nodeStatus) {
-
+            let isAllOk = true
+            let error = false
             for (let nodeName in originNetworkData.main.nodeStatus[network].nodes) {
                 let node = originNetworkData.main.nodeStatus[network].nodes[nodeName]
-
-                if (node.catching_up) {
-                    originNetworkData.main.nodeStatus[network].isAllOk = false
-                    originNetworkData.main.overview.networks[network].error = true
-                } else {
-                    originNetworkData.main.nodeStatus[network].isAllOk = true
-                    originNetworkData.main.overview.networks[network].error = false
+                if (node.catching_up !== false) {
+                    isAllOk = false
+                    error = true
                 }
             }
+            originNetworkData.main.nodeStatus[network].isAllOk = isAllOk
+            originNetworkData.main.overview.networks[network].error = error
         }
 
         const newNetworkDataStatus = JSON.parse(JSON.stringify(originNetworkData))
