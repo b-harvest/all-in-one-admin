@@ -10,13 +10,17 @@ export function getIntervalChainData(reduxDataSet) {
     // get and set gRPC responses at networkData variable
     setInterval(() => {
         for (const item in chains) {
+            let isSignInfoUpdated = false
             chains[item].forEach(info => {
                 let tcpAddress = `tcp://${info.ip}:26657`
                 if (info.port) {
                     tcpAddress = `tcp://${info.ip}:${info.port}`
                 }
                 getNodeStatus(tcpAddress, `${item}/${info.nodeName}`, originNetworkData.main.nodeStatus)
-                getValidatorSignInfo(tcpAddress, VA[item], `${item}/${info.nodeName}`, originNetworkData.main.nodeStatus)
+                if (!isSignInfoUpdated && info.nodeName.includes('s.')) {
+                    getValidatorSignInfo(tcpAddress, VA[item], `${item}/${info.nodeName}`, originNetworkData.main.nodeStatus)
+                    isSignInfoUpdated = true
+                }
             });
         }
     }, 3000)
