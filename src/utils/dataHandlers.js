@@ -1,5 +1,5 @@
-import { nodeStatusData, chains } from '@config/nodeInfo';
-import { getNodeStatus } from '@config/proto3';
+import { nodeStatusData, chains, valiAddresses as VA } from '@config/nodeInfo';
+import { getNodeStatus, getValidatorSignInfo } from '@config/proto3';
 
 
 export function getIntervalChainData(reduxDataSet) {
@@ -16,6 +16,7 @@ export function getIntervalChainData(reduxDataSet) {
                     tcpAddress = `tcp://${info.ip}:${info.port}`
                 }
                 getNodeStatus(tcpAddress, `${item}/${info.nodeName}`, originNetworkData.main.nodeStatus)
+                getValidatorSignInfo(tcpAddress, VA[item], `${item}/${info.nodeName}`, originNetworkData.main.nodeStatus)
             });
         }
     }, 3000)
