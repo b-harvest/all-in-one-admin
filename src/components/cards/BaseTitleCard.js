@@ -40,7 +40,7 @@ const StatusLight = styled.div`
     width:12px;
     height:12px;
     display: inline-block;
-    margin: 0 0 -1px 4px;
+    margin: 0 0 -2px 4px;
     border-radius: 50%;
     div {
         display :${({ isSign }) => isSign === 'loading' ? 'none' : 'block'};
