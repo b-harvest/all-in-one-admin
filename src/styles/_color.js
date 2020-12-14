@@ -10,7 +10,7 @@ export const color = {
   status_gray: 'gray',
   node_status_background_gray: '#d2d2d2',
   status_gay_box_shadow: '0 0 2px 3px #7d7d7d',
-  status_red: 'rgb(245, 2, 2)',
-  status_red_box_shadow: '0 0 2px 3px rgba(245, 2, 2, 0.92)',
+  status_red: 'rgb(230, 2, 2)',
+  status_red_box_shadow: '0 0 2px 3px rgba(230, 2, 2, 0.92)',
   node_status_background_red: '#ff00008a'
 }
