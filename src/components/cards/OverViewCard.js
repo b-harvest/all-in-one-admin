@@ -1,3 +1,4 @@
+import React from 'react';
 import { Component } from 'react';
 import styled from 'styled-components';
 import { size, color, media } from '@style'
@@ -125,4 +126,4 @@ const CenterDiv = styled.div`
     position: relative;
 `
 
-export default OverViewCard
+export default React.memo(OverViewCard)

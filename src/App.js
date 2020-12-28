@@ -11,7 +11,12 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={["/", "/main"]}>
+          <BasicLayout>
+            <Main />
+          </BasicLayout>
+        </Route>
+        <Route exact path="/chainlink">
           <BasicLayout>
             <Main />
           </BasicLayout>
