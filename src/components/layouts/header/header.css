@@ -38,7 +38,9 @@
   }
   
   .App-header_connect {
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
     height: 40px;
     width: 120px;
     margin: 10px 12px;
@@ -56,4 +58,19 @@
 
   .App-header_connect__off {
 
+  }
+
+  .link-wrapper {
+    text-align: left;
+    padding-left: 60px;
+    font-size: 1rem;
+    line-height: 60px;
+  }
+
+  .link:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  .link {
+    padding-bottom: 4px;
   }

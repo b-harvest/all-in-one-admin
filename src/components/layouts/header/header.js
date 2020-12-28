@@ -2,6 +2,7 @@
 import React from 'react';
 import './header.css';
 import logo from '../../../assets/favicon.png'
+import { NavLink } from 'react-router-dom';
 const Web3 = require("web3");
 
 class AppHeader extends React.Component {
@@ -45,6 +46,10 @@ class AppHeader extends React.Component {
             <header className="App-header">
 
                 <img className="App-logo" src={logo} alt="" />
+                <div className="link-wrapper">
+                    <NavLink className="link" exact to="/" activeStyle={{ borderBottom: "1px solid #ffaf29" }}>DashBoard</NavLink>
+                    <NavLink className="link" exact to="/chainlink" activeStyle={{ borderBottom: "1px solid #ffaf29" }}>ChainLink</NavLink>
+                </div>
                 <button onClick={this.ethEnabled} className="App-header_connect">CONNECT</button>
             </header>
         );
