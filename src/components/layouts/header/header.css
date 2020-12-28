@@ -4,8 +4,11 @@
     
     position: fixed;
     top: 0;
+    left: 0;
+
+    z-index: 10;
   
-    background-color: #ffc352;
+    background-color: #252734;
   
     -webkit-box-shadow: 0px 5px 9px 2px rgba(20, 18, 12, 0.15);
     -moz-box-shadow: 0px 5px 9px 2px rgba(20, 18, 12, 0.15);
@@ -31,11 +34,12 @@
     height: 40px;
     width: 120px;
     margin: 10px 12px;
-    background-color: #b57505;
+    background-color: #252734;
     border-radius: 4px;
+    cursor: pointer;
     font-size: 1rem;
-    color: #fff;
-    border: 2px solid  #b57505;
+    color:#ffaf29;
+    border: 2px solid  #ffaf29;
   }
 
   .App-header_connect__on {

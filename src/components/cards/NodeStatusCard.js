@@ -84,6 +84,7 @@ const TableWrapper = styled.div`
     box-shadow:${color.table_box_shadow};
     max-width: 704px;
     overflow-wrap: break-word;
+    margin: 0 auto;
 
     ${media.tablet`
         &::-webkit-scrollbar {

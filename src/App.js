@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import Main from '@page/main'
 import AddressFileReader from './components/fileReader/fileReader.js';
-import AppHeader from './components/header/header.js'
 import BasicLayout from '@layout/Basic'
 
 function App() {
@@ -19,8 +18,9 @@ function App() {
           </BasicLayout>
         </Route>
         <Route exact path="/chainlink">
-          <AppHeader />
-          <AddressFileReader />
+          <BasicLayout>
+            <AddressFileReader />
+          </BasicLayout>
         </Route>
       </Switch>
     </Router>
