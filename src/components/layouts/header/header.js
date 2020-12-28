@@ -1,6 +1,7 @@
 
 import React from 'react';
 import './header.css';
+import logo from '../../../assets/favicon.png'
 const Web3 = require("web3");
 
 class AppHeader extends React.Component {
@@ -42,7 +43,8 @@ class AppHeader extends React.Component {
     render() {
         return (
             <header className="App-header">
-                <h1 className="App-header_title">B-Harvest</h1>
+
+                <img className="App-logo" src={logo} alt="" />
                 <button onClick={this.ethEnabled} className="App-header_connect">CONNECT</button>
             </header>
         );
