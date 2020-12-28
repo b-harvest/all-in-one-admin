@@ -1,0 +1,47 @@
+.App-header {
+    height: 60px;
+    width: 100%;
+    
+    position: fixed;
+    top: 0;
+  
+    background-color: #ffc352;
+  
+    -webkit-box-shadow: 0px 5px 9px 2px rgba(20, 18, 12, 0.15);
+    -moz-box-shadow: 0px 5px 9px 2px rgba(20, 18, 12, 0.15);
+    box-shadow: 0px 5px 9px 2px rgba(20, 18, 12, 0.15);
+    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-header_title {
+    font-size: 1.5rem;
+    text-align: left;
+    
+    float: left;
+    padding-left: 12px;
+  }
+  
+  .App-header_connect {
+    float: right;
+    height: 40px;
+    width: 120px;
+    margin: 10px 12px;
+    background-color: #b57505;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #fff;
+    border: 2px solid  #b57505;
+  }
+
+  .App-header_connect__on {
+
+  }
+
+  .App-header_connect__off {
+
+  }
