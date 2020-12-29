@@ -22,6 +22,7 @@ import (
 
 var cred Credentials
 var conf *oauth2.Config
+var conn *grpc.ClientConn
 
 // Credentials which stores google ids.
 type Credentials struct {
@@ -63,6 +64,7 @@ func init() {
 		},
 		Endpoint: google.Endpoint,
 	}
+	grpcclient()
 }
 
 // AuthHandler handles authentication of a user and initiates a session.
@@ -127,13 +129,20 @@ func LoginHandler(c *gin.Context) {
 	c.HTML(http.StatusOK, "auth.tmpl", gin.H{"link": link})
 }
 
-//You need to change it to be a little more communication efficient.
-func GetnodeStatusHandler(c *gin.Context) {
-	conn, err := grpc.Dial("localhost:8088", grpc.WithInsecure(), grpc.WithBlock())
+func grpcclient() {
+	conn_v, err := grpc.Dial("localhost:8088", grpc.WithInsecure(), grpc.WithBlock())
+	conn = conn_v
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-	defer conn.Close()
+}
+
+//You need to change it to be a little more communication efficient.
+func GetnodeStatusHandler(c *gin.Context) {
+	if conn == nil {
+		grpcclient()
+	}
+	log.Println(conn)
 	connect := pb.NewMonitoringClient(conn)
 	nodeuri := c.Query("nodeuri")
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
@@ -148,11 +157,10 @@ func GetnodeStatusHandler(c *gin.Context) {
 }
 
 func GetvalidatorSignInfo(c *gin.Context) {
-	conn, err := grpc.Dial("localhost:8088", grpc.WithInsecure(), grpc.WithBlock())
-	if err != nil {
-		log.Fatalf("did not connect: %v", err)
+	if conn == nil {
+		grpcclient()
 	}
-	defer conn.Close()
+	log.Println(conn)
 	connect := pb.NewMonitoringClient(conn)
 	nodeuri := c.Query("nodeuri")
 	validator := c.Query("validatoraddress")
