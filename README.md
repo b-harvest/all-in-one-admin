@@ -1,5 +1,5 @@
 # all-in-one-admin
-"creds.json" and "/all-in-one-admin/src/config/nodeInfo.js" check
+"creds.json" and "/front/src/config/nodeInfo.js" check
 
 
 # Used
