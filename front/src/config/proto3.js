@@ -3,7 +3,7 @@ import Axios from "axios"
 
 export function getNodeStatus(uri, nodeTag, data) {
     const requestTime = new Date()
-    Axios.get(`${apiAddress.dev}/GetnodeStatus?nodeuri=${uri}`)
+    Axios.get(`${apiAddress.prod}/GetnodeStatus?nodeuri=${uri}`)
         .then(response => {
             const responseTime = new Date()
             const timeSpent = responseTime - requestTime
@@ -21,7 +21,8 @@ export function getNodeStatus(uri, nodeTag, data) {
 }
 
 export function getValidatorSignInfo(uri, vali_address, nodeTag, data) {
-    Axios.get(`${apiAddress.dev}/GetvalidatorSignInfo?nodeuri=${uri}&validatoraddress=${vali_address}`)
+    console.log(`${apiAddress.prod}/GetvalidatorSignInfo?nodeuri=${uri}&validatoraddress=${vali_address}`)
+    Axios.get(`${apiAddress.prod}/GetvalidatorSignInfo?nodeuri=${uri}&validatoraddress=${vali_address}`)
         .then(response => {
             let res = JSON.parse(response.data.status)
             data[nodeTag?.split('/')[0]].isSign = res.SignInfo
