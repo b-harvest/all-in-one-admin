@@ -36,7 +36,7 @@ func main() {
 
 	router.Use(middleware.AuthorizeRequest())
 	{
-		router.Use(static.Serve("/", static.LocalFile("./all-in-one-admin/build", true)))
+		router.Use(static.Serve("/", static.LocalFile("./front/build", true)))
 		router.GET("/GetnodeStatus", handlers.GetnodeStatusHandler)
 		router.GET("/GetvalidatorSignInfo", handlers.GetvalidatorSignInfo)
 	}
