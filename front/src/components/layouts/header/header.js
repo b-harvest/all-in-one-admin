@@ -50,7 +50,7 @@ class AppHeader extends React.Component {
                     <NavLink className="link" exact to="/" activeStyle={{ borderBottom: "1px solid #ffaf29" }}>DashBoard</NavLink>
                     <NavLink className="link" exact to="/chainlink" activeStyle={{ borderBottom: "1px solid #ffaf29" }}>ChainLink</NavLink>
                 </div>
-                <button onClick={this.ethEnabled} className="App-header_connect">CONNECT</button>
+                {/* <button onClick={this.ethEnabled} className="App-header_connect">CONNECT</button> */}
             </header>
         );
     }

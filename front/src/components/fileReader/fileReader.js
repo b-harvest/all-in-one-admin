@@ -1,18 +1,18 @@
 import React from 'react';
 import './fileReader.css';
-import { chainlinkAddressData } from "@config/nodeInfo.js"
+import { chainlinkAddressData, web3Provider } from "@config/nodeInfo.js"
 const Web3 = require('web3');
-const web3 = new Web3(window.ethereum);
+const web3 = new Web3(web3Provider);
 let currentProviderAddress = null
 
-web3.eth.getAccounts((error, result) => {
-  if (error) {
-    console.log(error);
-  } else {
-    currentProviderAddress = String(result[0]);
-    console.log('currentProviderAddress', currentProviderAddress)
-  }
-})
+// web3.eth.getAccounts((error, result) => {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     currentProviderAddress = String(result[0]);
+//     console.log('currentProviderAddress', currentProviderAddress)
+//   }
+// })
 
 class AddressFileReader extends React.Component {
   constructor(props) {
