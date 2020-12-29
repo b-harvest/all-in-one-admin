@@ -1,39 +1,31 @@
-import { clientIP } from './nodeInfo'
-const { StatusRequest, SignInfoRequest } = require('./proto3/monitoring_pb.js');
-const { MonitoringClient } = require('./proto3/monitoring_grpc_web_pb.js');
-const monitoringService = new MonitoringClient(clientIP);
-const StatusReq = new StatusRequest();
+import { apiAddress } from './nodeInfo'
+import Axios from "axios"
 
 export function getNodeStatus(uri, nodeTag, data) {
-    const requestInfo = StatusReq.setNodeuri(uri);
     const requestTime = new Date()
-    monitoringService.getnodeStatus(requestInfo, {}, function (err, response) {
-        const responseTime = new Date()
-        const timeSpent = responseTime - requestTime
-        if (response) {
-            let parsedArray = JSON.parse(response.array)
+    Axios.get(`${apiAddress.dev}/GetnodeStatus?nodeuri=${uri}`)
+        .then(response => {
+            const responseTime = new Date()
+            const timeSpent = responseTime - requestTime
+            let parsedArray = JSON.parse([response.data.status])
             parsedArray.moniker = `${nodeTag?.split('/')[1]}\n(${timeSpent}ms)`
 
             let monikerReplacedResponse = parsedArray
             data[nodeTag?.split('/')[0]].nodes[nodeTag?.split('/')[1]] = monikerReplacedResponse
-        } else {
-            // console.log(err)
+        }).catch(err => {
+            const responseTime = new Date()
+            const timeSpent = responseTime - requestTime
             data[nodeTag?.split('/')[0]].nodes[nodeTag?.split('/')[1]] = { "latest_block_height": err.message, "catching_up": 'code:' + err.code, "moniker": `${nodeTag?.split('/')[1]}\n(${timeSpent}ms)` }
-        }
-    })
+            console.error(err)
+        })
 }
 
 export function getValidatorSignInfo(uri, vali_address, nodeTag, data) {
-    let signInfo = new SignInfoRequest();
-    signInfo.setValidatorAddress(vali_address)
-    signInfo.setNodeuri(uri)
-    monitoringService.getvalidatorSignInfo(signInfo, {}, function (err, response) {
-        if (response) {
-            let res = JSON.parse(response.array[0])
+    Axios.get(`${apiAddress.dev}/GetvalidatorSignInfo?nodeuri=${uri}&validatoraddress=${vali_address}`)
+        .then(response => {
+            let res = JSON.parse(response.data.status)
             data[nodeTag?.split('/')[0]].isSign = res.SignInfo
-            // console.log(data[nodeTag?.split('/')[0]].name, data[nodeTag?.split('/')[0]].isSign)
-        } else {
-            console.log(err)
-        }
-    })
+        }).catch(err => {
+            console.error(err)
+        })
 }
