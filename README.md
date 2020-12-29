@@ -1,1 +1,1 @@
-# gin-oauth-test
+# all-in-one-admin
