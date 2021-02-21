@@ -137,6 +137,14 @@ func grpcclient() {
 	}
 }
 
+func grpcclient_v2() {
+	conn_v, err := grpc.Dial("localhost:8089", grpc.WithInsecure(), grpc.WithBlock())
+	conn = conn_v
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+}
+
 //You need to change it to be a little more communication efficient.
 func GetnodeStatusHandler(c *gin.Context) {
 	if conn == nil {
@@ -178,14 +186,14 @@ func GetvalidatorSignInfo(c *gin.Context) {
 
 func GetnodeStatusHandler_v2(c *gin.Context) {
 	if conn == nil {
-		grpcclient()
+		grpcclient_v2()
 	}
 	log.Println(conn)
 	connect := pb.NewMonitoringClient(conn)
 	nodeuri := c.Query("nodeuri")
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := connect.GetnodeStatusV2(ctx, &pb.StatusRequest{NodeURI: nodeuri})
+	r, err := connect.GetnodeStatus(ctx, &pb.StatusRequest{NodeURI: nodeuri})
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	} else {
@@ -196,7 +204,7 @@ func GetnodeStatusHandler_v2(c *gin.Context) {
 
 func GetvalidatorSignInfo_v2(c *gin.Context) {
 	if conn == nil {
-		grpcclient()
+		grpcclient_v2()
 	}
 	log.Println(conn)
 	connect := pb.NewMonitoringClient(conn)
@@ -205,7 +213,7 @@ func GetvalidatorSignInfo_v2(c *gin.Context) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	q, err := connect.GetvalidatorSignInfoV2(ctx, &pb.SignInfoRequest{NodeURI: nodeuri, ValidatorAddress: validator})
+	q, err := connect.GetvalidatorSignInfo(ctx, &pb.SignInfoRequest{NodeURI: nodeuri, ValidatorAddress: validator})
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	} else {
