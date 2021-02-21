@@ -23,6 +23,7 @@ import (
 var cred Credentials
 var conf *oauth2.Config
 var conn *grpc.ClientConn
+var conn2 *grpc.ClientConn
 
 // Credentials which stores google ids.
 type Credentials struct {
@@ -138,8 +139,8 @@ func grpcclient() {
 }
 
 func grpcclient_v2() {
-	conn_v, err := grpc.Dial("localhost:8089", grpc.WithInsecure(), grpc.WithBlock())
-	conn = conn_v
+	conn_v2, err := grpc.Dial("localhost:8089", grpc.WithInsecure(), grpc.WithBlock())
+	conn2 = conn_v2
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
@@ -185,11 +186,11 @@ func GetvalidatorSignInfo(c *gin.Context) {
 }
 
 func GetnodeStatusHandler_v2(c *gin.Context) {
-	if conn == nil {
+	if conn2 == nil {
 		grpcclient_v2()
 	}
-	log.Println(conn)
-	connect := pb.NewMonitoringClient(conn)
+	log.Println(conn2)
+	connect := pb.NewMonitoringClient(conn2)
 	nodeuri := c.Query("nodeuri")
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
@@ -203,11 +204,11 @@ func GetnodeStatusHandler_v2(c *gin.Context) {
 }
 
 func GetvalidatorSignInfo_v2(c *gin.Context) {
-	if conn == nil {
+	if conn2 == nil {
 		grpcclient_v2()
 	}
-	log.Println(conn)
-	connect := pb.NewMonitoringClient(conn)
+	log.Println(conn2)
+	connect := pb.NewMonitoringClient(conn2)
 	nodeuri := c.Query("nodeuri")
 	validator := c.Query("validatoraddress")
 
