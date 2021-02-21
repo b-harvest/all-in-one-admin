@@ -7,7 +7,7 @@ require (
 	github.com/gin-contrib/timeout v0.0.1 // indirect
 	github.com/gin-gonic/contrib v0.0.0-20201101042839-6a891bf89f19
 	github.com/gin-gonic/gin v1.6.3
-	github.com/golang/protobuf v1.4.3 // indirect
+	github.com/golang/protobuf v1.4.3
 	github.com/gorilla/sessions v1.2.1 // indirect
 	golang.org/x/oauth2 v0.0.0-20201208152858-08078c50e5b5
 	google.golang.org/grpc v1.31.0
