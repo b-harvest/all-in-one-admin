@@ -66,6 +66,7 @@ func init() {
 		Endpoint: google.Endpoint,
 	}
 	grpcclient()
+	grpcclient_v2()
 }
 
 // AuthHandler handles authentication of a user and initiates a session.
