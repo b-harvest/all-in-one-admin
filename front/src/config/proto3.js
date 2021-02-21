@@ -23,7 +23,8 @@ export function getNodeStatus(uri, nodeTag, data) {
 }
 
 export function getValidatorSignInfo(uri, vali_address, nodeTag, data) {
-    Axios.get(`${process.env.NODE_ENV === "test" ? apiAddress.dev : apiAddress.prod}/GetvalidatorSignInfo?nodeuri=${uri}&validatoraddress=${vali_address}`)
+    const isCosmos = nodeTag?.split('/')[0] === "cosmos" ? true : false
+    Axios.get(`${process.env.NODE_ENV === "test" ? apiAddress.dev : apiAddress.prod}/${isCosmos ? 'GetvalidatorSignInfo_v2' : 'GetvalidatorSignInfo'}?nodeuri=${uri}&validatoraddress=${vali_address}`)
         .then(response => {
             let res = JSON.parse(response.data.status)
             data[nodeTag?.split('/')[0]].isSign = res.SignInfo
