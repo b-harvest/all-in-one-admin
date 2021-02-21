@@ -39,6 +39,8 @@ func main() {
 		router.Use(static.Serve("/", static.LocalFile("./front/build", true)))
 		router.GET("/GetnodeStatus", handlers.GetnodeStatusHandler)
 		router.GET("/GetvalidatorSignInfo", handlers.GetvalidatorSignInfo)
+		router.GET("/GetnodeStatus_v2", handlers.GetnodeStatusHandler_v2)
+		router.GET("/GetvalidatorSignInfo_v2", handlers.GetvalidatorSignInfo_v2)
 	}
 
 	if err := router.RunTLS(":443", "./server.crt", "./server.key"); err != nil {

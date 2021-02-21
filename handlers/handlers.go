@@ -175,3 +175,41 @@ func GetvalidatorSignInfo(c *gin.Context) {
 	}
 	log.Printf("Config: %v", q)
 }
+
+func GetnodeStatusHandler_v2(c *gin.Context) {
+	if conn == nil {
+		grpcclient()
+	}
+	log.Println(conn)
+	connect := pb.NewMonitoringClient(conn)
+	nodeuri := c.Query("nodeuri")
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+	r, err := connect.GetnodeStatus_v2(ctx, &pb.StatusRequest{NodeURI: nodeuri})
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"status": r.Status})
+	}
+	log.Printf("Config: %v", r)
+}
+
+func GetvalidatorSignInfo_v2(c *gin.Context) {
+	if conn == nil {
+		grpcclient()
+	}
+	log.Println(conn)
+	connect := pb.NewMonitoringClient(conn)
+	nodeuri := c.Query("nodeuri")
+	validator := c.Query("validatoraddress")
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+	q, err := connect.GetvalidatorSignInfo_v2(ctx, &pb.SignInfoRequest{NodeURI: nodeuri, ValidatorAddress: validator})
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"status": q.Status})
+	}
+	log.Printf("Config: %v", q)
+}
