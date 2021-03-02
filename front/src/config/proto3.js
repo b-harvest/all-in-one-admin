@@ -3,9 +3,9 @@ import Axios from "axios"
 
 export function getNodeStatus(uri, nodeTag, data) {
     const requestTime = new Date()
-    const isCosmos = nodeTag?.split('/')[0] === "cosmos" ? true : false
+    const isV2 = nodeTag?.split('/')[0] === "cosmos" || nodeTag?.split('/')[0] === "iris"
 
-    Axios.get(`${process.env.NODE_ENV === "test" ? apiAddress.dev : apiAddress.prod}/${isCosmos ? 'GetnodeStatus_v2' : 'GetnodeStatus'}?nodeuri=${uri}`)
+    Axios.get(`${process.env.NODE_ENV === "test" ? apiAddress.dev : apiAddress.prod}/${isV2 ? 'GetnodeStatus_v2' : 'GetnodeStatus'}?nodeuri=${uri}`)
         .then(response => {
             const responseTime = new Date()
             const timeSpent = responseTime - requestTime
